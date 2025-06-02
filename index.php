@@ -73,7 +73,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 <h1>Kilau Sempurna Setiap Hari</h1>
                 <h2>Baju Bersih, Mood Happy</h2>
                 <p>Instant Glowing untuk Pakaian Bebas Noda dan Bau</p>
-                <a href="reservasi.php" class="btn">RESERVASI DISINI!</a>
+                <div class="hero-buttons">
+                    <a href="reservasi.php" class="btn">RESERVASI DISINI!</a>
+                    <a href="progress.php" class="btn secondary-btn">LIHAT PROGRES PESANAN</a> <!-- Tombol baru -->
+                </div>
             </div>
             <div class="hero-image">
                 <img src="images/tampilan1.png" alt="Hero Image">
