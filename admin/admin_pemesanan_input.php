@@ -153,6 +153,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 padding: 20px;
             }
         }
+        html, body {
+            height: 100%;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
     </style>
 </head>
 
@@ -208,10 +222,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="admin_pemesanan.php" class="back-btn">Back to Orders</a>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2025 Laundry Jogja | Admin Panel</p>
-    </footer>
 
 </body>
 </html>

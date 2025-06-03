@@ -160,10 +160,5 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2025 Laundry Jogja | Admin Panel</p>
-    </footer>
-
 </body>
 </html>
