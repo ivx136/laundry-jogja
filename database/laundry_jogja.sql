@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2025 pada 13.47
+-- Waktu pembuatan: 03 Jun 2025 pada 15.07
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -28,25 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `reservasi` (
-  `id` int(11) NOT NULL,
+  `id_pesanan` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `no_telepon` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
-  `status` varchar(50) NOT NULL DEFAULT 'Pending'
+  `status` varchar(50) NOT NULL DEFAULT 'Pending',
+  `id_pelanggan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `reservasi`
 --
 
-INSERT INTO `reservasi` (`id`, `nama`, `no_telepon`, `email`, `alamat`, `created_at`, `status`) VALUES
-(1, 'raka', '081122223333', 'raka@gmail.com', 'Jl. magelang', '2025-06-02 13:16:28', 'Completed'),
-(2, 'atan', '1111', 'dknasd@gmaialfm', 'fakfnka', '2025-06-02 13:46:36', 'Pending'),
-(3, 'rafkyy', '11111', 'snasdk@gmail.com', 'jl.sdasf', '2025-06-02 14:01:25', 'Pending'),
-(4, 'raka', '111', 'Rsfkas@gmail.com', 'jl magelang', '2025-06-03 18:26:20', 'Pending'),
-(5, 'atan', '28372837', 'Sfnasjfna@gmail.com', 'jl. skaskdn ma njsfnasjn', '2025-06-03 18:26:58', 'Pending');
+INSERT INTO `reservasi` (`id_pesanan`, `nama`, `no_telepon`, `email`, `alamat`, `created_at`, `status`, `id_pelanggan`) VALUES
+(8, 'rafky', '08111', 'rafky@gmail.com', 'jl. petung', '2025-06-03 19:31:41', 'Pending', NULL),
+(9, 'rafky', '23232', 'sfasjn@gmail.com', 'jl petung', '2025-06-03 19:46:13', 'Pending', NULL),
+(10, 'rafky', '111', 'sds@gmail.com', 'jl skksk', '2025-06-03 19:52:40', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +68,7 @@ CREATE TABLE `tanggapan` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id_pelanggan` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT current_timestamp()
@@ -79,7 +78,7 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
+INSERT INTO `users` (`id_pelanggan`, `username`, `password`, `created_at`) VALUES
 (1, 'rafkyy', '$2y$10$P1X1z0/VS1lmoUdu88pvjOZAOcN8V362UpLuH9lSFEHlhJygncoR2', '2025-06-02 13:11:29');
 
 --
@@ -90,7 +89,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
 -- Indeks untuk tabel `reservasi`
 --
 ALTER TABLE `reservasi`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_pesanan`),
+  ADD KEY `fk_pesanan` (`id_pelanggan`);
 
 --
 -- Indeks untuk tabel `tanggapan`
@@ -102,7 +102,7 @@ ALTER TABLE `tanggapan`
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_pelanggan`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
@@ -113,7 +113,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `reservasi`
 --
 ALTER TABLE `reservasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanggapan`
@@ -125,7 +125,17 @@ ALTER TABLE `tanggapan`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `reservasi`
+--
+ALTER TABLE `reservasi`
+  ADD CONSTRAINT `fk_pesanan` FOREIGN KEY (`id_pelanggan`) REFERENCES `users` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
